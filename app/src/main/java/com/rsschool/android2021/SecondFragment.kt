@@ -12,12 +12,14 @@ class SecondFragment : Fragment() {
 
     private var backButton: Button? = null
     private var result: TextView? = null
+    private lateinit var fragmentListener: FragmentListener
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        fragmentListener = context as FragmentListener
         return inflater.inflate(R.layout.fragment_second, container, false)
     }
 
@@ -29,16 +31,16 @@ class SecondFragment : Fragment() {
         val min = arguments?.getInt(MIN_VALUE_KEY) ?: 0
         val max = arguments?.getInt(MAX_VALUE_KEY) ?: 0
 
-        result?.text = generate(min, max).toString()
+        val generation = generate(min, max)
+        result?.text = generation.toString()
 
         backButton?.setOnClickListener {
-            // TODO: implement back
+            fragmentListener.actionPerformed1(generation)
         }
     }
 
     private fun generate(min: Int, max: Int): Int {
-        // TODO: generate random number
-        return 0
+        return (min..max).random()
     }
 
     companion object {
@@ -47,9 +49,8 @@ class SecondFragment : Fragment() {
         fun newInstance(min: Int, max: Int): SecondFragment {
             val fragment = SecondFragment()
             val args = Bundle()
-
-            // TODO: implement adding arguments
-
+            args.putInt(MIN_VALUE_KEY,min)
+            args.putInt(MAX_VALUE_KEY,max)
             return fragment
         }
 
