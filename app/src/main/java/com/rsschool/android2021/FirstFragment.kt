@@ -12,12 +12,14 @@ class FirstFragment : Fragment() {
 
     private var generateButton: Button? = null
     private var previousResult: TextView? = null
+    private lateinit var fragmentListener: FragmentListener
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        fragmentListener = context as FragmentListener
         return inflater.inflate(R.layout.fragment_first, container, false)
     }
 
@@ -29,11 +31,13 @@ class FirstFragment : Fragment() {
         val result = arguments?.getInt(PREVIOUS_RESULT_KEY)
         previousResult?.text = "Previous result: ${result.toString()}"
 
-        // TODO: val min = ...
-        // TODO: val max = ...
+        val min = view.findViewById<EditText>(R.id.min_value)
+        val max = view.findViewById<EditText>(R.id.max_value)
+
 
         generateButton?.setOnClickListener {
-            // TODO: send min and max to the SecondFragment
+            fragmentListener.actionPerformed2(min.text.toString().toInt(),
+                max.text.toString().toInt())
         }
     }
 
