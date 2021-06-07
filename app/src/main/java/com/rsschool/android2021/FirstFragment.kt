@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import android.widget.EditText
 
 class FirstFragment : Fragment() {
 

@@ -51,6 +51,7 @@ class SecondFragment : Fragment() {
             val args = Bundle()
             args.putInt(MIN_VALUE_KEY,min)
             args.putInt(MAX_VALUE_KEY,max)
+            fragment.arguments = args
             return fragment
         }
 
